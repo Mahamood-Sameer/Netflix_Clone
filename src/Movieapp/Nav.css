@@ -1,0 +1,35 @@
+.nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    padding: 30px;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+
+.nav__black{
+    background-color: #111;
+}
+
+.nav__logo{
+    width: 100px;
+    position: fixed;
+    left: 20px;
+    object-fit: contain;
+}
+
+.nav__signin{
+    position: fixed;
+    right: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    width:fit-content;
+    padding:10px;
+    font-size: 0.8rem;
+}

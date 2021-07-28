@@ -1,0 +1,44 @@
+.movie__row_container >h3{
+    margin-left: 10px;
+    padding: 5px;
+    color: white;
+}
+
+.movie__rows{
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.movie__rows::-webkit-scrollbar{
+    display: none;
+}
+
+.movie__poster{
+    object-fit: contain;
+    width: 100%;
+    max-height: 95px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+    transition-property: all;
+    transition-duration: 0.5s;
+}
+.Large_postre{
+    object-fit: contain;
+    width: 100%;
+    max-height: 250px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
+    transition-property: all;
+    transition-duration: 0.2s;
+}
+.movie__poster:hover,.Large_postre:hover{
+    transform: scale(1.05);
+}
+.video{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
