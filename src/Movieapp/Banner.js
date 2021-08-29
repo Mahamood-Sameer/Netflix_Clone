@@ -20,7 +20,7 @@ class Banner extends Component {
             this.setState({
                 movie:result.data.results[random]
             })
-            console.log(this.state.movie)
+            
         })
     }
     

@@ -8,6 +8,7 @@
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
+    scroll-behavior: smooth;
 }
 
 .movie__rows::-webkit-scrollbar{
@@ -41,4 +42,26 @@
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+.navigationArrows{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    color: white !important;
+    justify-content: space-between;
+}
+.Arrows{
+    padding: 5px;
+    border-radius: 50%;
+    background-color: black;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+
+@media (max-width:800px){
+    .navigationArrows{
+        display: none;
+    }
 }
