@@ -54,7 +54,7 @@
 .Arrows{
     padding: 5px;
     border-radius: 50%;
-    background-color: black;
+    background-color: rgb(36, 35, 35);
     opacity: 0.8;
     cursor: pointer;
 }

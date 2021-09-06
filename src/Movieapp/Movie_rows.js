@@ -27,18 +27,21 @@ class Movie_rows extends Component {
             this.setState({
                 trailerURL: ""
             })
-        }
-        else {
+            window.scrollBy(0,-350)
+        } 
+        if (!(this.state.trailerURL)) {
             movieTrailer(movie?.name || movie?.title || movie?.original_title || movie?.original_name || "").then((url) => {
                 const urlParams = new URLSearchParams(new URL(url).search);
                 this.setState({
                     trailerURL: urlParams.get('v')
                 })
+                window.scrollBy(0,350)
             }).catch((error) => { console.log(error) })
         }
+
     }
 
-
+    
 
     componentDidMount() {
         instance.get(this.props.fetchURL).then((result) => {
@@ -56,7 +59,7 @@ class Movie_rows extends Component {
 
         const opts = {
             height: '390',
-            width: '340',
+            width: '390',
             playerVars: {
                 // https://developers.google.com/youtube/player_parameters
                 autoplay: 1,
@@ -71,29 +74,29 @@ class Movie_rows extends Component {
                     {
                         this.state.movies.map((movie) => {
                             return (
-
-                                <img src={`${this.state.url}${this.props.isLarge ? movie.poster_path : movie.backdrop_path}`} alt={movie.name} className={this.props.isLarge ? "Large_postre" : "movie__poster"} key={movie.id} onClick={() => { this.clickHandler(movie) }} ></img>
-
+                                <>
+                                    <img src={`${this.state.url}${this.props.isLarge ? movie.poster_path : movie.backdrop_path}`} alt={movie.name} className={this.props.isLarge ? "Large_postre" : "movie__poster"} key={movie.id} onClick={() => { this.clickHandler(movie) }} ></img>
+                                </>
                             )
                         })
                     }
                 </div>
 
                 <div className="navigationArrows">
-                    <ArrowBackIcon className={this.state.calssname__nav_back}  onClick={()=>{
-                        if(this.props.title==="NETFLIX ORIGINALS"){
-                            document.querySelector('.NETFLIX').scrollBy(-650,0)
+                    <ArrowBackIcon className={this.state.calssname__nav_back} onClick={() => {
+                        if (this.props.title === "NETFLIX ORIGINALS") {
+                            document.querySelector('.NETFLIX').scrollBy(-650, 0)
                         }
-                        else{
-                            document.querySelector(`.${this.props.title}`).scrollBy(-650,0)
+                        else {
+                            document.querySelector(`.${this.props.title}`).scrollBy(-650, 0)
                         }
                     }} />
-                    <ArrowForwardIcon className={this.state.calssname__nav_front} onClick={()=>{
-                        if(this.props.title==="NETFLIX ORIGINALS"){
-                            document.querySelector('.NETFLIX').scrollBy(650,0)
+                    <ArrowForwardIcon className={this.state.calssname__nav_front} onClick={() => {
+                        if (this.props.title === "NETFLIX ORIGINALS") {
+                            document.querySelector('.NETFLIX').scrollBy(650, 0)
                         }
-                        else{
-                            document.querySelector(`.${this.props.title}`).scrollBy(650,0)
+                        else {
+                            document.querySelector(`.${this.props.title}`).scrollBy(650, 0)
                         }
                     }} />
                 </div>
