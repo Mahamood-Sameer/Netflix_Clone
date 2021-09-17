@@ -27,7 +27,7 @@ class Movie_rows extends Component {
             this.setState({
                 trailerURL: ""
             })
-            window.scrollBy(0,-350)
+           
         } 
         if (!(this.state.trailerURL)) {
             movieTrailer(movie?.name || movie?.title || movie?.original_title || movie?.original_name || "").then((url) => {
@@ -35,7 +35,7 @@ class Movie_rows extends Component {
                 this.setState({
                     trailerURL: urlParams.get('v')
                 })
-                window.scrollBy(0,350)
+                
             }).catch((error) => { console.log(error) })
         }
 
