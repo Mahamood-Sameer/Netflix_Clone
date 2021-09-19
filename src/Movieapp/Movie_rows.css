@@ -64,4 +64,9 @@
     .navigationArrows{
         display: none;
     }
+
+    .trailer{
+        width: 200px;
+        height: 200px;
+    }
 }

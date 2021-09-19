@@ -70,8 +70,8 @@ class Movie_rows extends PureComponent {
 
 
         const opts = {
-            height: '390',
-            width: '390',
+            height: '290',
+            width: '290',
             playerVars: {
                 // https://developers.google.com/youtube/player_parameters
                 autoplay: 0,
@@ -105,7 +105,9 @@ class Movie_rows extends PureComponent {
                                             }}>
                                                 <DialogTitle>Trailer</DialogTitle>
                                                 <DialogContent>
-                                                    {this.state.trailerURL && <YouTube videoId={this.state.trailerURL} opts={opts}></YouTube>}
+                                                    <center>
+                                                    {this.state.trailerURL && <YouTube className="trailer" videoId={this.state.trailerURL} opts={opts}></YouTube>}
+                                                    </center>
                                                 </DialogContent>
                                                 <DialogActions>
                                                     <Button onClick={() => {
