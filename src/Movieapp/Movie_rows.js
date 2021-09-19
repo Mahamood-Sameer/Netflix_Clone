@@ -1,13 +1,18 @@
-// import { LocalConvenienceStoreOutlined } from '@material-ui/icons'
-import React, { Component } from 'react'
+
+import React, { Component , PureComponent} from 'react'
 import instance from './axios'
 import "./Movie_rows.css"
 import YouTube from 'react-youtube'
 import movieTrailer from 'movie-trailer'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { Button } from '@material-ui/core';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-class Movie_rows extends Component {
+class Movie_rows extends PureComponent {
 
     constructor(props) {
         super(props)
@@ -18,30 +23,37 @@ class Movie_rows extends Component {
             trailerURL: "",
             classname: `movie__rows ${this.props.title}`,
             calssname__nav_front: `Arrows ${this.props.title}`,
-            calssname__nav_back: `Arrows ${this.props.title}`
+            calssname__nav_back: `Arrows ${this.props.title}`,
+            open: false
         }
     }
 
     clickHandler = (movie) => {
-        if (this.state.trailerURL) {
+        if (this.state.open === false) {
+            this.setState({
+                open: true
+            })
+        }
+
+        if (this.state.trailerURL !== "") {
             this.setState({
                 trailerURL: ""
             })
-           
-        } 
-        if (!(this.state.trailerURL)) {
+
+        }
+        if (this.state.trailerURL === "") {
             movieTrailer(movie?.name || movie?.title || movie?.original_title || movie?.original_name || "").then((url) => {
                 const urlParams = new URLSearchParams(new URL(url).search);
                 this.setState({
                     trailerURL: urlParams.get('v')
                 })
-                
-            }).catch((error) => { console.log(error) })
+
+            }).catch((error) => { alert(error.message) })
         }
 
     }
 
-    
+
 
     componentDidMount() {
         instance.get(this.props.fetchURL).then((result) => {
@@ -62,7 +74,7 @@ class Movie_rows extends Component {
             width: '390',
             playerVars: {
                 // https://developers.google.com/youtube/player_parameters
-                autoplay: 1,
+                autoplay: 0,
             },
         };
 
@@ -76,6 +88,37 @@ class Movie_rows extends Component {
                             return (
                                 <>
                                     <img src={`${this.state.url}${this.props.isLarge ? movie.poster_path : movie.backdrop_path}`} alt={movie.name} className={this.props.isLarge ? "Large_postre" : "movie__poster"} key={movie.id} onClick={() => { this.clickHandler(movie) }} ></img>
+
+                                    {/* Dialouge Boxes */}
+
+
+                                    {
+                                        (this.state.trailerURL && this.state.open===true) &&
+                                        <div className="video">
+                                            {
+                                                console.log()
+                                            }
+                                            <Dialog open={this.state.open} onClose={() => {
+                                                this.setState({
+                                                    open: false
+                                                })
+                                            }}>
+                                                <DialogTitle>Trailer</DialogTitle>
+                                                <DialogContent>
+                                                    {this.state.trailerURL && <YouTube videoId={this.state.trailerURL} opts={opts}></YouTube>}
+                                                </DialogContent>
+                                                <DialogActions>
+                                                    <Button onClick={() => {
+                                                        this.setState({
+                                                            trailerURL: "",
+                                                            open: false,
+                                                        })
+                                                    }}>Cancel</Button>
+                                                </DialogActions>
+                                            </Dialog>
+                                        </div>
+                                    }
+
                                 </>
                             )
                         })
@@ -101,9 +144,6 @@ class Movie_rows extends Component {
                     }} />
                 </div>
 
-                <div className="video">
-                    {this.state.trailerURL && <YouTube videoId={this.state.trailerURL} opts={opts}></YouTube>}
-                </div>
             </div>
         )
     }
