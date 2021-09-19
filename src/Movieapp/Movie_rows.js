@@ -70,8 +70,8 @@ class Movie_rows extends PureComponent {
 
 
         const opts = {
-            height: '290',
-            width: '290',
+            height: '450',
+            width: '400',
             playerVars: {
                 // https://developers.google.com/youtube/player_parameters
                 autoplay: 0,
